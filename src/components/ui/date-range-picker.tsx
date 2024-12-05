@@ -13,7 +13,7 @@ import {
 
 interface DatePickerWithRangeProps {
   date: DateRange;
-  setDate: (date: DateRange) => void;
+  setDate: (date: DateRange | undefined) => void;
   className?: string;
 }
 
@@ -55,7 +55,7 @@ export function DatePickerWithRange({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={(range) => setDate(range)}
             numberOfMonths={2}
           />
         </PopoverContent>

@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function Reports() {
   const [groupBy, setGroupBy] = useState<"month" | "account" | null>(null);
-  const [dateRange, setDateRange] = useState({
+  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
     from: addDays(new Date(), -30),
     to: new Date(),
   });
@@ -23,8 +23,8 @@ export function Reports() {
     queryKey: ["reports", groupBy, dateRange],
     queryFn: async () => {
       const params = new URLSearchParams({
-        startDate: format(dateRange.from, "yyyy-MM-dd"),
-        endDate: format(dateRange.to, "yyyy-MM-dd"),
+        startDate: format(dateRange.from || new Date(), "yyyy-MM-dd"),
+        endDate: format(dateRange.to || new Date(), "yyyy-MM-dd"),
         ...(groupBy && { groupBy }),
       });
       const response = await fetch(`/api/reports?${params}`);
@@ -52,7 +52,13 @@ export function Reports() {
             <SelectItem value="account">By Account</SelectItem>
           </SelectContent>
         </Select>
-        <DatePickerWithRange date={dateRange} setDate={setDateRange} />
+        <DatePickerWithRange 
+          date={dateRange} 
+          setDate={(range) => setDateRange({
+            from: range?.from ?? undefined,
+            to: range?.to ?? undefined
+          })}
+        />
       </div>
 
       {isLoading ? (
