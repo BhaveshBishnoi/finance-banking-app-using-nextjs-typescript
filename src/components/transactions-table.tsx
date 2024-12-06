@@ -344,7 +344,7 @@ export function TransactionsTable() {
                         <TableCell>{transaction.category}</TableCell>
                         <TableCell>
                           <div className="flex gap-2 flex-wrap">
-                            {(transactionTags[transaction.id] || transaction.tags.map(tag => tag.name)).map(tag => (
+                            {(transactionTags[transaction.id] || (transaction.tags || []).map(tag => tag.name)).map(tag => (
                               <Badge key={tag} variant="secondary" className={`rounded-md bg-${getRandomColor()}-600`}>
                                 #{tag}
                               </Badge>
