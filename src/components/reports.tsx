@@ -12,6 +12,13 @@ import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import { addDays, format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 
+interface ReportItem {
+  month?: string;
+  account_name?: string;
+  total_income: number;
+  total_expense: number;
+}
+
 export function Reports() {
   const [groupBy, setGroupBy] = useState<"month" | "account" | null>(null);
   const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
@@ -66,12 +73,12 @@ export function Reports() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {groupBy ? (
-            Array.isArray(reportData) && reportData.map((item: any, index: number) => (
+            Array.isArray(reportData) && reportData.map((item: ReportItem, index: number) => (
               <Card key={index}>
                 <CardHeader>
                   <CardTitle>
                     {groupBy === "month"
-                      ? format(new Date(item.month), "MMMM yyyy")
+                      ? format(new Date(item.month || new Date()), "MMMM yyyy")
                       : item.account_name}
                   </CardTitle>
                 </CardHeader>
