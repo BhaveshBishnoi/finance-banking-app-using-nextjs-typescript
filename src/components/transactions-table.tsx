@@ -20,31 +20,16 @@ import { Account, Transaction, TransactionCategory, Tag } from "@/types/finance"
 import { format, startOfMonth, endOfMonth, isWithinInterval } from "date-fns"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { MessageSquare, Tag as TagIcon, Plus } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea"
-import { Command, CommandInput, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Button } from "./ui/button"
-import CommentPopup from './commentpopup'; // Import the CommentPopup component
+import CommentPopup from './commentpopup'; 
 
 const CATEGORIES: TransactionCategory[] = ['Income', 'Expense', 'Asset', 'Liability']
-const RANDOM_TAGS = ['Entertainment', 'Repayment', 'Education', 'Grocery', 'Charity', 'Shopping']; // List of random tags
 
 // Function to generate a random color from a predefined set
 const getRandomColor = () => {
